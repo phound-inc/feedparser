@@ -1984,7 +1984,12 @@ if _XML_AVAILABLE:
                 self.decls['xmlns:' + prefix] = uri
 
         def startElementNS(self, name, qname, attrs):
-            namespace, localname = name
+            if len(name) == 2:
+                namespace, localname = name
+            else:
+                namespace = None
+                localname = ''.join(name)
+
             lowernamespace = str(namespace or '').lower()
             if lowernamespace.find(u'backend.userland.com/rss') <> -1:
                 # match any backend.userland.com namespace
@@ -2035,7 +2040,11 @@ if _XML_AVAILABLE:
             self.handle_data(text)
 
         def endElementNS(self, name, qname):
-            namespace, localname = name
+            if len(name) == 2:
+                namespace, localname = name
+            else:
+                namespace = None
+                localname = ''.join(name)
             lowernamespace = str(namespace or '').lower()
             if qname and qname.find(':') > 0:
                 givenprefix = qname.split(':')[0]
