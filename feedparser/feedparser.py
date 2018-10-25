@@ -3768,15 +3768,19 @@ def _parse_poslist(value, geom_type, swap=True, dims=2):
         return None
 
 def _gen_georss_coords(value, swap=True, dims=2):
+    # Just disable this junk for now
+    return
+    yield
+
     # A generator of (lon, lat) pairs from a string of encoded GeoRSS
     # coordinates. Converts to floats and swaps order.
-    latlons = itertools.imap(float, value.strip().replace(',', ' ').split())
-    nxt = latlons.next
-    while True:
-        t = [nxt(), nxt()][::swap and -1 or 1]
-        if dims == 3:
-            t.append(nxt())
-        yield tuple(t)
+    # latlons = itertools.imap(float, value.strip().replace(',', ' ').split())
+    # nxt = latlons.next
+    # while True:
+    #     t = [nxt(), nxt()][::swap and -1 or 1]
+    #     if dims == 3:
+    #         t.append(nxt())
+    #     yield tuple(t)
 
 def _parse_georss_point(value, swap=True, dims=2):
     # A point contains a single latitude-longitude pair, separated by
