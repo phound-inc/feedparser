@@ -1333,12 +1333,14 @@ class _FeedParserMixin:
     def _start_subtitle(self, attrsD):
         self.pushContent('subtitle', attrsD, u'text/plain', 1)
     _start_tagline = _start_subtitle
-    _start_itunes_subtitle = _start_subtitle
+    def _start_itunes_subtitle(self, attrsD):
+        self.pushContent('itunes_subtitle', attrsD, u'text/plain', 1)
 
     def _end_subtitle(self):
         self.popContent('subtitle')
     _end_tagline = _end_subtitle
-    _end_itunes_subtitle = _end_subtitle
+    def _end_itunes_subtitle(self):
+        self.popContent('itunes_subtitle')
 
     def _start_rights(self, attrsD):
         self.pushContent('rights', attrsD, u'text/plain', 1)
