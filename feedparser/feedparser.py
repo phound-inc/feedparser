@@ -1849,10 +1849,6 @@ class _FeedParserMixin:
             self._getContext()['image'] = FeedParserDict({'href': attrsD.get('url'), 'itunes': attrsD.get('url')})
     _start_itunes_link = _start_itunes_image
 
-    def _end_itunes_block(self):
-        value = self.pop('itunes_block', 0)
-        self._getContext()['itunes_block'] = (value == 'yes') and 1 or 0
-
     def _end_itunes_explicit(self):
         value = self.pop('itunes_explicit', 0)
         # Convert 'yes' -> True, 'clean' to False, and any other value to None
